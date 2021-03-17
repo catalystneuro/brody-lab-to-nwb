@@ -1,14 +1,8 @@
 """Authors: Cody Baker."""
-from pathlib import Path
-from typing import Optional, Union
-import numpy as np
-
-from nwb_conversion_tools import NWBConverter, SpikeGadgetsRecordingInterface
+from nwb_conversion_tools import NWBConverter, SpikeGadgetsRecordingInterface, NeuralynxRecordingInterface, \
+    SpikeGLXRecordingInterface, SpikeGLXLFPInterface
 
 from .brodybehaviordatainterface import BrodyBehaviorDataInterface
-
-OptionalArrayType = Optional[Union[list, np.ndarray]]
-PathType = Union[Path, str]
 
 
 class BrodysNWBConverter(NWBConverter):
@@ -16,6 +10,9 @@ class BrodysNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
+        NeuralynxRecording=NeuralynxRecordingInterface,
+        SpikeGLXRecording=SpikeGLXRecordingInterface,
+        SpikeGLXLFP=SpikeGLXLFPInterface,
         Behavior=BrodyBehaviorDataInterface
     )
 

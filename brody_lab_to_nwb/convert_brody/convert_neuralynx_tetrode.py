@@ -6,15 +6,14 @@ from datetime import timedelta, datetime
 from brody_lab_to_nwb import BrodyNWBConverter
 
 # Point to the base folder path for both recording data and Virmen
-base_path = Path("D:/Brody/Chronic Rat Neuropixels (Poisson Clicks Task)")
+base_path = Path("D:/Brody/Neuralynx Tetrode Data")
 
 # Name the NWBFile and point to the desired save path
 nwbfile_path = base_path / "FullTesting.nwb"
 
 # Point to the various files for the conversion
-# TODO
-raw_data_file = base_path
-behavior_file_path = base_path
+raw_data_file = base_path / "A182_2018_10_05" / "Raw"
+behavior_file_path = base_path / "A182_2018_10_05" / "Processed"
 
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
@@ -35,7 +34,7 @@ stub_test = True
 
 # Run the conversion
 source_data = dict(
-    SpikeGadgetsRecording=dict(file_path=str(raw_data_file)),
+    NeuralynxRecording=dict(file_path=str(raw_data_file)),
     Behavior=dict(file_path=str(behavior_file_path))
 )
 conversion_options = dict(SpikeGadgetsRecording=dict(stub_test=stub_test))
