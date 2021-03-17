@@ -1,1 +1,1 @@
-from .convert_towers_task.brodynwbconverter import BrodysNWBConverter
+from .convert_brody.brodynwbconverter import BrodysNWBConverter
