@@ -37,7 +37,7 @@ source_data = dict(
     NeuralynxRecording=dict(file_path=str(raw_data_file)),
     Behavior=dict(file_path=str(behavior_file_path))
 )
-conversion_options = dict(SpikeGadgetsRecording=dict(stub_test=stub_test))
+conversion_options = dict(NeuralynxRecording=dict(stub_test=stub_test))
 converter = BrodyNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
