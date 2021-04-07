@@ -17,3 +17,7 @@ and then
 ```
 pip install -e brody-lab-to-nwb
 ```
+
+
+Note that access to the Neuralynx and Spikegadgets interfaces may depend on certain PRs/branches on python-neo, will
+try to keep this up to date as those roll out.
