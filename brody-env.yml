@@ -1,0 +1,29 @@
+name: brodylab
+dependencies:
+  - python=3.8
+  - pip
+  - toml
+  - pip:
+    - numpy
+    - h5py
+    - cython
+    - tqdm
+    - click
+    - pillow
+    - scipy
+    - matplotlib
+    - scikit-learn
+    - pyqt5
+    - pyqtwebengine
+    - klusta
+    - klustakwik2
+    - jupyterlab
+    - pynwb
+    - isodate
+    - git+https://github.com/spikeinterface/spikeextractors.git@master
+    - spiketoolkit==0.7.4
+    - spikesorters==0.4.4
+    - spikecomparison==0.3.2
+    - spikewidgets==0.5.2
+    - git+https://github.com/spikeinterface/spikeextractors.git@master
+    - git+https://github.com/NeuralEnsemble/python-neo.git@master
