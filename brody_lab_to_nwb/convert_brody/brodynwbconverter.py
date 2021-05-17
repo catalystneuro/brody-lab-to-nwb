@@ -7,7 +7,7 @@ from .neuralynxbehaviordatainterface import NeuralynxBehaviorDataInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
-    """Primary conversion class for the Brody lab processing pipeline."""
+    """Primary conversion class for the SpikeGLX formatted Brody lab data."""
 
     data_interface_classes = dict(
         SpikeGLXRecording=SpikeGLXRecordingInterface,
@@ -15,19 +15,11 @@ class PoissonClicksNWBConverter(NWBConverter):
         Processed=PoissonClicksDataInterface
     )
 
-    def get_metadata(self):
-        # TODO
-        raise NotImplementedError("Not built yet!")
 
-
-class ChronicRatNWBConverter(NWBConverter):
-    """Primary conversion class for the Brody lab processing pipeline."""
+class BrodyNeuralynxNWBConverter(NWBConverter):
+    """Primary conversion class for the Neuralynx formatted Brody lab data."""
 
     data_interface_classes = dict(
         NeuralynxRecording=NeuralynxRecordingInterface,
         Processed=NeuralynxBehaviorDataInterface
     )
-
-    def get_metadata(self):
-        # TODO
-        raise NotImplementedError("Not built yet!")

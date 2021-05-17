@@ -3,7 +3,7 @@ from pathlib import Path
 from isodate import duration_isoformat
 from datetime import timedelta, datetime
 
-from brody_lab_to_nwb import BrodyNWBConverter
+from brody_lab_to_nwb import BrodyNeuralynxNWBConverter
 
 # Point to the base folder path for both recording data and Virmen
 base_path = Path("D:/Brody/Neuralynx Tetrode Data")
@@ -39,7 +39,7 @@ source_data = dict(
     Processed=dict(file_path=str(processed_file_path))
 )
 conversion_options = dict(NeuralynxRecording=dict(stub_test=stub_test))
-converter = BrodyNWBConverter(source_data=source_data)
+converter = BrodyNeuralynxNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
 metadata['Subject'].update(subject_info)
