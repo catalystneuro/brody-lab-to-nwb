@@ -13,8 +13,7 @@ nwbfile_path = base_path / "FullTesting.nwb"
 
 # Point to the various files for the conversion
 session_name = "A242_2019_05_30"  # or "A256_2020_10_07", or "T219_2019_11_22"
-# TODO
-behavior_file_path = base_path
+processed_file_path = base_path / session_name / "Processed" / f"{session_name}_Cells.mat"
 
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
@@ -41,7 +40,7 @@ lfp_data_file = raw_data_file.parent / raw_data_file.name.replace("ap", "lf")
 source_data = dict(
     SpikeGLXRecording=dict(file_path=str(raw_data_file)),
     SpikeGLXLFP=dict(file_path=str(lfp_data_file)),
-    Behavior=dict(file_path=str(behavior_file_path))
+    Processed=dict(file_path=str(processed_file_path))
 )
 conversion_options = dict(SpikeGLXRecording=dict(stub_test=stub_test), SpikeGLXLFP=dict(stub_test=stub_test))
 converter = BrodyNWBConverter(source_data=source_data)

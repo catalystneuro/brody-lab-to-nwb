@@ -12,8 +12,9 @@ base_path = Path("D:/Brody/Neuralynx Tetrode Data")
 nwbfile_path = base_path / "FullTesting.nwb"
 
 # Point to the various files for the conversion
-raw_data_file = base_path / "A182_2018_10_05" / "Raw"
-behavior_file_path = base_path / "A182_2018_10_05" / "Processed"
+session_name = "A182_2018_10_05"
+raw_data_folder = base_path / session_name / "Raw"
+processed_file_path = base_path / session_name / "Processed" / "Msorted_A182_2018-10-05.mat"
 
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
@@ -34,8 +35,8 @@ stub_test = True
 
 # Run the conversion
 source_data = dict(
-    NeuralynxRecording=dict(file_path=str(raw_data_file)),
-    Behavior=dict(file_path=str(behavior_file_path))
+    NeuralynxRecording=dict(folder_path=str(raw_data_folder)),
+    Processed=dict(file_path=str(processed_file_path))
 )
 conversion_options = dict(NeuralynxRecording=dict(stub_test=stub_test))
 converter = BrodyNWBConverter(source_data=source_data)

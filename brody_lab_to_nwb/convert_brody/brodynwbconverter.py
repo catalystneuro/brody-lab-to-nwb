@@ -1,19 +1,31 @@
 """Authors: Cody Baker."""
-from nwb_conversion_tools import NWBConverter, SpikeGadgetsRecordingInterface, NeuralynxRecordingInterface, \
-    SpikeGLXRecordingInterface, SpikeGLXLFPInterface
+from nwb_conversion_tools import NWBConverter, NeuralynxRecordingInterface, SpikeGLXRecordingInterface, \
+    SpikeGLXLFPInterface
 
-from .brodybehaviordatainterface import BrodyBehaviorDataInterface
+from .poissonclicksdatainterface import PoissonClicksDataInterface
+from .neuralynxbehaviordatainterface import NeuralynxBehaviorDataInterface
 
 
-class BrodysNWBConverter(NWBConverter):
+class PoissonClicksNWBConverter(NWBConverter):
     """Primary conversion class for the Brody lab processing pipeline."""
 
     data_interface_classes = dict(
-        SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
-        NeuralynxRecording=NeuralynxRecordingInterface,
         SpikeGLXRecording=SpikeGLXRecordingInterface,
         SpikeGLXLFP=SpikeGLXLFPInterface,
-        Behavior=BrodyBehaviorDataInterface
+        Processed=PoissonClicksDataInterface
+    )
+
+    def get_metadata(self):
+        # TODO
+        raise NotImplementedError("Not built yet!")
+
+
+class ChronicRatNWBConverter(NWBConverter):
+    """Primary conversion class for the Brody lab processing pipeline."""
+
+    data_interface_classes = dict(
+        NeuralynxRecording=NeuralynxRecordingInterface,
+        Processed=NeuralynxBehaviorDataInterface
     )
 
     def get_metadata(self):
