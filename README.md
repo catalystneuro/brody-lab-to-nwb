@@ -1,4 +1,16 @@
 # brody-lab-to-nwb
 Repository for the NWB conversion and processing codes for the Brody lab.
 
-Currently in development. To install, clone this git repo and do `pip install -e brody-lab-to-nwb`.
+To install, clone this repo and current dependencies by
+```
+git clone https://github.com/catalystneuro/brody-lab-to-nwb
+git clone https://github.com/catalystneuro/nwb-conversion-tools
+git clone https://github.com/spikeinterface/spikeextractors
+git clone https://github.com/NeuralEnsemble/python-neo
+```
+and then
+```
+pip install -e brody-lab-to-nwb
+```
+
+Note that functionality with the Spikegadgets format will require dependencies specific to that branch.
