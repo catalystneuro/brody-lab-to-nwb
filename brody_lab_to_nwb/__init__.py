@@ -1,1 +1,2 @@
-from .convert_brody.brodynwbconverter import BrodysNWBConverter
+from .convert_brody.brodynwbconverter import PoissonClicksNWBConverter
+from .convert_brody.brodynwbconverter import BrodyNeuralynxNWBConverter
