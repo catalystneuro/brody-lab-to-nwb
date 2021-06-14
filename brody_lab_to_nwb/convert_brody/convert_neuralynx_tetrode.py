@@ -6,7 +6,7 @@ from datetime import timedelta, datetime
 from brody_lab_to_nwb import BrodyNeuralynxNWBConverter
 
 # Point to the base folder path for both recording data and Virmen
-base_path = Path("D:/Brody/Neuralynx Tetrode Data")
+base_path = Path("E:/Brody/Neuralynx Tetrode Data")
 
 # Name the NWBFile and point to the desired save path
 nwbfile_path = base_path / "FullTesting.nwb"
@@ -35,10 +35,10 @@ stub_test = True
 
 # Run the conversion
 source_data = dict(
-    NeuralynxRecording=dict(folder_path=str(raw_data_folder)),
+    # NeuralynxRecording=dict(folder_path=str(raw_data_folder)),
     Processed=dict(file_path=str(processed_file_path))
 )
-conversion_options = dict(NeuralynxRecording=dict(stub_test=stub_test))
+conversion_options = dict()#NeuralynxRecording=dict(stub_test=stub_test))
 converter = BrodyNeuralynxNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
