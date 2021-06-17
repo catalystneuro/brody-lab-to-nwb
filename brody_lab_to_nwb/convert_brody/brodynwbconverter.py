@@ -6,6 +6,7 @@ from nwb_conversion_tools import (
 
 from .poissonclicksdatainterface import PoissonClicksDataInterface
 from .neuralynxbehaviordatainterface import NeuralynxBehaviorDataInterface
+from .brodyneuralynxprocessedsortinginterface import BrodyNeuralynxProcessedSortingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -23,5 +24,6 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         #NeuralynxRecording=NeuralynxRecordingInterface,
-        Processed=NeuralynxBehaviorDataInterface
+        Processed=NeuralynxBehaviorDataInterface,
+        ProcessedSorting=BrodyNeuralynxProcessedSortingInterface
     )
