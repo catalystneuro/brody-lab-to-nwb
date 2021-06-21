@@ -12,7 +12,7 @@ The file ".rec" have :
   * a second part for the binary buffer
 Author: Samuel Garcia
 """
-from .baserawio import (BaseRawIO, _signal_channel_dtype, _signal_stream_dtype,
+from neo.rawio.baserawio import (BaseRawIO, _signal_channel_dtype, _signal_stream_dtype,
                 _spike_channel_dtype, _event_channel_dtype)
 
 import numpy as np

@@ -1,20 +1,9 @@
-from spikeextractors.extractors.neoextractors.neobaseextractor import NeoBaseRecordingExtractor
+from .neobaseextractor import NeoBaseRecordingExtractor
 
 
-class NeuralynxRecordingExtractor(NeoBaseRecordingExtractor):
-    """
-    The neruralynx extractor is wrapped from neo.rawio.NeuralynxRawIO.
+class SpikeGadgetsRecordingExtractor(NeoBaseRecordingExtractor):
 
-    Parameters
-    ----------
-    dirname: str
-        The neuralynx folder that contain all neuralynx files ('nse', 'ncs', 'nev', 'ntt')
-    block_index: None or int
-        If the underlying dataset have several blocks the index must be specified.
-    seg_index_index: None or int
-        If the underlying dataset have several segments the index must be specified.
-    """
-    extractor_name = 'Spikegadgets'
+    extractor_name = 'SpikeGadgets'
     mode = 'file'
     installed = True
     NeoRawIOClass = 'SpikeGadgetsRawIO'
