@@ -3,14 +3,26 @@ from pathlib import Path
 from re import search
 import numpy as np
 
-from spikeextractors import (SpikeGLXRecordingExtractor, NeuralynxRecordingExtractor, MultiRecordingChannelExtractor)
+from spikeextractors import SpikeGLXRecordingExtractor, NeuralynxRecordingExtractor, MultiRecordingChannelExtractor
 
 from .spikegadgetsrecordingextractor import SpikeGadgetsRecordingExtractor
 
 
 PathType = Union[str, Path]
 
+
 def make_extractor(file_or_folder_path: PathType):
+    """
+    Route the file or folder path to construct the appropriate RecordingExtractor type.
+
+    Intended to simplify the SpikeInterface pipeline notebook across formats.
+
+    Parameters
+    ----------
+    file_or_folder_path : PathType
+        File path to SpikeGLX (ab.bin) or SpikeGadgets (.rec) recording,
+        or folder path to collection of Neuralynx (.ncs) files.
+    """
     suffix = Path(file_or_folder_path).suffix
     if suffix == ".bin":
         return SpikeGLXRecordingExtractor(file_path=file_or_folder_path)
