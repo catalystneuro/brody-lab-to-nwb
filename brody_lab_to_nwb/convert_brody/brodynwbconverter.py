@@ -3,6 +3,9 @@ from nwb_conversion_tools import NWBConverter, SpikeGLXRecordingInterface, Spike
 
 from .poissonclicksdatainterface import PoissonClicksDataInterface
 from .neuralynxbehaviordatainterface import NeuralynxBehaviorDataInterface
+from .wirelesstetrodebehaviordatainterface import WirelessTetrodeBehaviorDataInterface
+from .utils.neuralynxdatainterface import NeuralynxRecordingInterface
+from .utils.spikegadgetsdatainterface import SpikeGadgetsRecordingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -19,6 +22,14 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
     """Primary conversion class for the Neuralynx formatted Brody lab data."""
 
     data_interface_classes = dict(
-        # NeuralynxRecording=NeuralynxRecordingInterface,
+        NeuralynxRecording=NeuralynxRecordingInterface,
         Processed=NeuralynxBehaviorDataInterface
+    )
+
+class WirelessTetrodeNWBConverter(NWBConverter):
+    """Primary conversion class for the SpikeGadgets formatted Brody lab data."""
+
+    data_interface_classes = dict(
+        SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
+        Processed=WirelessTetrodeBehaviorDataInterface
     )
