@@ -1,12 +1,11 @@
 """Authors: Cody Baker."""
-from nwb_conversion_tools import (
-    NWBConverter,# NeuralynxRecordingInterface,
-    SpikeGLXRecordingInterface, SpikeGLXLFPInterface
-)
+from nwb_conversion_tools import NWBConverter, SpikeGLXRecordingInterface, SpikeGLXLFPInterface
 
-from .poissonclicksdatainterface import PoissonClicksDataInterface
-from .neuralynxbehaviordatainterface import NeuralynxBehaviorDataInterface
-from .brodyneuralynxprocessedsortinginterface import BrodyNeuralynxProcessedSortingInterface
+from .poissonclicksprocesseddatainterface import PoissonClicksProcessedInterface
+from .neuralynxprocesseddatainterface import NeuralynxProcessedInterface
+from .wirelesstetrodeprocesseddatainterface import WirelessTetrodeProcessedInterface
+from .utils.neuralynxdatainterface import NeuralynxRecordingInterface
+from .utils.spikegadgetsdatainterface import SpikeGadgetsRecordingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -15,7 +14,7 @@ class PoissonClicksNWBConverter(NWBConverter):
     data_interface_classes = dict(
         SpikeGLXRecording=SpikeGLXRecordingInterface,
         SpikeGLXLFP=SpikeGLXLFPInterface,
-        Processed=PoissonClicksDataInterface
+        Processed=PoissonClicksProcessedInterface
     )
 
 
@@ -23,7 +22,15 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
     """Primary conversion class for the Neuralynx formatted Brody lab data."""
 
     data_interface_classes = dict(
-        #NeuralynxRecording=NeuralynxRecordingInterface,
-        Processed=NeuralynxBehaviorDataInterface,
-        ProcessedSorting=BrodyNeuralynxProcessedSortingInterface
+        NeuralynxRecording=NeuralynxRecordingInterface,
+        Processed=NeuralynxProcessedInterface
+    )
+
+
+class WirelessTetrodeNWBConverter(NWBConverter):
+    """Primary conversion class for the SpikeGadgets formatted Brody lab data."""
+
+    data_interface_classes = dict(
+        SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
+        Processed=WirelessTetrodeProcessedInterface
     )

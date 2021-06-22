@@ -6,18 +6,8 @@ from pynwb import NWBFile
 from h5py import File
 
 
-def calculate_rec_time(time: np.ndarray, coefs: np.ndarray, mu: np.ndarray):
-    """
-    Auxiliary function for converting a timestamp in the processed mat file to the corresponding time in the recording.
-
-    Uses the polyfit values of coef and mu from the original Matlab regression, and assumes these return microseconds.
-    """
-    n = len(coefs)-1
-    return sum([coef * ((time - mu[0]) / mu[1])**(n-j) for j, coef in enumerate(coefs)]) / 1E3
-
-
-class NeuralynxBehaviorDataInterface(BaseDataInterface):
-    """Conversion class for the behavioral data corresponding to the Neuralynx format for the Brody lab."""
+class PoissonClicksProcessedInterface(BaseDataInterface):
+    """Conversion class for the processed data corresponding to the SpikeGLX format for the Brody lab."""
 
     @classmethod
     def get_source_schema(cls):
@@ -46,20 +36,6 @@ class NeuralynxBehaviorDataInterface(BaseDataInterface):
 
     def run_conversion(self, nwbfile: NWBFile, metadata: dict):
         mat_file = File(self.source_data["file_path"], mode="r")
-
-        coefs = [x[0] for x in mat_file["Msorted"]["sync_fit"]["p"][()]]
-        mu = mat_file["Msorted"]["sync_fit"]["mu"][()][0]
-        # start_time = [
-        #     calculate_rec_time(time=x, coefs=coefs[-6:], mu=mu)
-        #     for x in mat_file["Msorted"]["Trials"]["stateTimes"]["sending_trialnum"][()][0]
-        # ]
-        # stop_time = [
-        #     calculate_rec_time(time=x, coefs=coefs[-6:], mu=mu)
-        #     for x in mat_file["Msorted"]["Trials"]["stateTimes"]["cleaned_up"][()][0]
-        # ]
-        start_time = mat_file["Msorted"]["Trials"]["stateTimes"]["sending_trialnum"][()][0]
-        stop_time = mat_file["Msorted"]["Trials"]["stateTimes"]["cleaned_up"][()][0]
-
         side_mapping = dict(l="left", r="right", f="front")  # TODO: check on "f"
         mat_data = dict(
             trial_type=[chr(x) for x in mat_file["Msorted"]["Trials"]["trial_type"][0]],
@@ -109,7 +85,7 @@ class NeuralynxBehaviorDataInterface(BaseDataInterface):
                 #laser_freq_hz=mat_file["Msorted"]["Trials"]["laser"]["laterality"][()][0],
                 #laser_freq_hz=mat_file["Msorted"]["Trials"]["laser"]["stim_per"][()][0],
             )
-            nwbfile.add_trial_column(name="laser_on_or_off", description="Whether the laser was enabled or disabled.")
+            nwbfile.add_trial_column(name="on_or_off", description="Whether the laser was enabled or disabled.")
             nwbfile.add_trial_column(name="laser_pulse_ms", description="")  # TODO
             nwbfile.add_trial_column(name="laser_freq_hz", description="")  # TODO
             nwbfile.add_trial_column(name="laser_latency_ms", description="")  # TODO
@@ -117,8 +93,8 @@ class NeuralynxBehaviorDataInterface(BaseDataInterface):
 
         for k in range(n_trials):
             trial_kwargs = dict(
-                start_time=start_time[k],
-                stop_time=stop_time[k],
+                start_time=np.nan,
+                stop_time=np.nan,
                 trial_type=mat_data["trial_type"][k],
                 violated=mat_data["violated"][k],
                 is_hit=mat_data["is_hit"][k],
@@ -137,7 +113,7 @@ class NeuralynxBehaviorDataInterface(BaseDataInterface):
                 )
             if add_laser:
                 trial_kwargs.update(
-                    laser_on_or_off=mat_data["on_or_off"][k],
+                    on_or_off=mat_data["on_or_off"][k],
                     laser_pulse_ms=mat_data["laser_pulse_ms"][k],
                     laser_freq_hz=mat_data["laser_freq_hz"][k],
                     laser_latency_ms=mat_data["laser_latency_ms"][k],
