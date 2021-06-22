@@ -6,8 +6,8 @@ from pynwb import NWBFile
 from h5py import File
 
 
-class PoissonClicksDataInterface(BaseDataInterface):
-    """Conversion class for the Brody lab behavioral data."""
+class NeuralynxProcessedInterface(BaseDataInterface):
+    """Conversion class for the processed data corresponding to the Neuralynx format for the Brody lab."""
 
     @classmethod
     def get_source_schema(cls):
@@ -27,7 +27,7 @@ class PoissonClicksDataInterface(BaseDataInterface):
 
     def run_conversion(self, nwbfile: NWBFile, metadata: dict):
         mat_file = File(self.source_data["file_path"], mode="r")
-        trial_info = mat_file["Trials"]
+        trial_info = mat_file["Msorted"]["Trials"]
         trial_type = [chr(x) for x in trial_info["trial_type"][0]]
         n_trials = len(trial_type)
 

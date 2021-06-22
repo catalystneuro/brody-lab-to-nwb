@@ -6,8 +6,8 @@ from pynwb import NWBFile
 from h5py import File
 
 
-class NeuralynxBehaviorDataInterface(BaseDataInterface):
-    """Conversion class for the behavioral data corresponding to the Neuralynx format for the Brody lab."""
+class WirelessTetrodeProcessedInterface(BaseDataInterface):
+    """Conversion class for the processed data corresponding to the Neuralynx format for the Brody lab."""
 
     @classmethod
     def get_source_schema(cls):

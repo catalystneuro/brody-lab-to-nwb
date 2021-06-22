@@ -38,6 +38,6 @@ class NeuralynxRecordingInterface(BaseRecordingExtractorInterface):
         sort_idx = np.argsort(file_nums)
         sorted_neuralynx_files = (np.array(neuralynx_files)[sort_idx]).tolist()
         self.recording_extractor = self.RX(
-            [NeuralynxRecordingExtractor(filename=filename) for filename in sorted_neuralynx_files]
+            [NeuralynxRecordingExtractor(filename=filename) for filename in sorted_neuralynx_files[:4]]
         )
         self.subset_channels = None
