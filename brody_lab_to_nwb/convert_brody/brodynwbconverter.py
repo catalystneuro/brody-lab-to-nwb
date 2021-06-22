@@ -6,6 +6,7 @@ from .neuralynxprocesseddatainterface import NeuralynxProcessedInterface
 from .wirelesstetrodeprocesseddatainterface import WirelessTetrodeProcessedInterface
 from .utils.neuralynxdatainterface import NeuralynxRecordingInterface
 from .utils.spikegadgetsdatainterface import SpikeGadgetsRecordingInterface
+from .brodyneuralynxprocessedsortinginterface import BrodyNeuralynxProcessedSortingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -23,6 +24,7 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         NeuralynxRecording=NeuralynxRecordingInterface,
+        BrodyNeuralynxSorting=BrodyNeuralynxProcessedSortingInterface,
         Processed=NeuralynxProcessedInterface
     )
 
