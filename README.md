@@ -12,5 +12,3 @@ and then
 ```
 pip install -e brody-lab-to-nwb
 ```
-
-Note that functionality with the Spikegadgets format will require dependencies specific to that branch.
