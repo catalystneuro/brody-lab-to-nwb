@@ -4,8 +4,9 @@ from nwb_conversion_tools import NWBConverter, SpikeGLXRecordingInterface, Spike
 from .poissonclicksprocesseddatainterface import PoissonClicksProcessedInterface
 from .neuralynxprocesseddatainterface import NeuralynxProcessedInterface
 from .wirelesstetrodeprocesseddatainterface import WirelessTetrodeProcessedInterface
-from .utils.neuralynxdatainterface import NeuralynxRecordingInterface
-from .utils.spikegadgetsdatainterface import SpikeGadgetsRecordingInterface
+
+from .temporary_interfaces.neuralynxdatainterface import NeuralynxRecordingInterface
+from .temporary_interfaces.spikegadgetsdatainterface import SpikeGadgetsRecordingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
