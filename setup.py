@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+import os
 
-with open('README.md', 'r') as f:
+here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, "requirements.txt")) as f:
+    install_requires = f.read().strip().split("\n")
+
+with open("README.md", "r") as f:
     long_description = f.read()
+
 setup(
-    name='brody_lab_to_nwb',
-    version='0.0.1',
-    description='NWB conversion scripts, functions, and classes for the Brody lab.',
+    name="brody_lab_to_nwb",
+    version="0.0.1",
+    description="NWB conversion scripts, functions, and classes for the Brody lab.",
     long_description=long_description,
-    long_description_content_type='text/markdown',
-    author='Cody Baker, Alessio Buccino, and Ben Dichter',
-    email='ben.dichter@catalystneuro.com',
+    long_description_content_type="text/markdown",
+    author="Cody Baker, Alessio Buccino, and Ben Dichter.",
+    email="ben.dichter@catalystneuro.com",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=[
-        'matplotlib', 'scipy', 'hdf5storage', 'jupyter', 'xlrd', 'h5py', 'pynwb', 'spikeextractors', 'nwbwidgets'
-        'nwb-conversion-tools',
-    ],
+    python_requires=">=3.7",
+    install_requires=install_requires
 )

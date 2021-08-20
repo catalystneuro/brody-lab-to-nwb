@@ -1,11 +1,7 @@
 # brody-lab-to-nwb
 Repository for the NWB conversion and processing codes for the Brody lab.
 
-To install, clone this repo and current dependencies by
+To install, run the command
 ```
-git clone https://github.com/catalystneuro/brody-lab-to-nwb
-```
-and then
-```
-pip install -e brody-lab-to-nwb
+pip install git+https://github.com/catalystneuro/brody-lab-to-nwb
 ```
