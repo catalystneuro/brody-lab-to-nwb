@@ -6,8 +6,8 @@ from pynwb import NWBFile
 from h5py import File
 
 
-class NeuralynxProcessedInterface(BaseDataInterface):
-    """Conversion class for the processed data corresponding to the SpikeGLX format for the Brody lab."""
+class MSortedProcessedInterface(BaseDataInterface):
+    """Conversion class for processed behavioral data parsed from raw 'saved history'."""
 
     @classmethod
     def get_source_schema(cls):
