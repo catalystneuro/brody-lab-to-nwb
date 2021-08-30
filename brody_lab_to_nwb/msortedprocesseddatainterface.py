@@ -36,7 +36,7 @@ class MSortedProcessedInterface(BaseDataInterface):
 
     def run_conversion(self, nwbfile: NWBFile, metadata: dict):
         mat_file = File(self.source_data["file_path"], mode="r")
-        side_mapping = dict(l="left", r="right", f="front")  # TODO: check on "f"
+        side_mapping = dict(l="left", r="right", f="front")
 
         mat_data = dict(
             start_times=mat_file["Msorted"]["Trials"]["stateTimes"]["sending_trialnum"][()][0],
@@ -90,7 +90,7 @@ class MSortedProcessedInterface(BaseDataInterface):
 
         if add_pharma:
             mat_data.update(
-                pharma_manipulation=mat_file["Msorted"]["Trials"]["pharma"]["manip"],  # TODO, need to test non-none
+                pharma_manipulation=mat_file["Msorted"]["Trials"]["pharma"]["manip"],
                 pharma_injector_mm=mat_file["Msorted"]["Trials"]["pharma"]["injector_mm"][()][0],
                 pharma_dose_ng=mat_file["Msorted"]["Trials"]["pharma"]["doseNG"][()][0]
             )
@@ -110,11 +110,6 @@ class MSortedProcessedInterface(BaseDataInterface):
                 laser_freq_hz=mat_file["Msorted"]["Trials"]["laser"]["freqHz"][()][0],
                 laser_latency_ms=mat_file["Msorted"]["Trials"]["laser"]["latencyMS"][()][0],
                 laser_duration_ms=mat_file["Msorted"]["Trials"]["laser"]["durMS"][()][0],
-                # TODO, figure out how to load these from partially empty cells
-                # laser_trigger_event=mat_file["Msorted"]["Trials"]["laser"]["triggerEvent"][()][0],
-                # laser_brain_area=mat_file["Msorted"]["Trials"]["laser"]["brain_area"][()][0],
-                # laser_laterality=mat_file["Msorted"]["Trials"]["laser"]["laterality"][()][0],
-                # laser_stim_per=mat_file["Msorted"]["Trials"]["laser"]["stim_per"][()][0],
             )
 
             laser_column_descriptions = dict(
@@ -123,10 +118,6 @@ class MSortedProcessedInterface(BaseDataInterface):
                 freq_hz="",  # TODO
                 latency_ms="",  # TODO
                 duration_ms="",  # TODO
-                # trigger_event="",  # TODO
-                # brain_area="",  # TODO
-                # laterality="",  # TODO
-                # stim_per="",  # TODO
             )
             for col, description in laser_column_descriptions.items():
                 name = f"laser_{col}"
