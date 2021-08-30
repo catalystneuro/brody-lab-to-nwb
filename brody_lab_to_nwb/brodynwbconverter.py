@@ -7,6 +7,7 @@ from nwb_conversion_tools import (
 )
 
 from .msortedprocesseddatainterface import MSortedProcessedInterface
+from .msortedsortinginterface import MSortedSortingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -15,7 +16,7 @@ class PoissonClicksNWBConverter(NWBConverter):
     data_interface_classes = dict(
         SpikeGLXRecording=SpikeGLXRecordingInterface,
         SpikeGLXLFP=SpikeGLXLFPInterface,
-        Processed=MSortedProcessedInterface
+        ProcessedBehavior=MSortedProcessedInterface
     )
 
 
@@ -24,5 +25,6 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         NeuralynxRecording=NeuralynxRecordingInterface,
-        Processed=MSortedProcessedInterface
+        ProcessedBehavior=MSortedProcessedInterface,
+        Sorted=MSortedSortingInterface
     )

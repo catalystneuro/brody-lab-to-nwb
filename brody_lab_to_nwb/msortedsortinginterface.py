@@ -4,13 +4,13 @@ import numpy as np
 from h5py import File
 from nwb_conversion_tools.datainterfaces.ecephys.basesortingextractorinterface import BaseSortingExtractorInterface
 
-from .brodyneuralynxprocessedsortingextractor import BrodyNeuralynxProcessedSortingExtractor
+from .msortedsortingextractor import MSortedSortingExtractor
 
 
-class BrodyNeuralynxProcessedSortingInterface(BaseSortingExtractorInterface):
+class MSortedSortingInterface(BaseSortingExtractorInterface):
     """Conversion class for the pre-sorted data corresponding to the Neuralynx format for the Brody lab."""
 
-    SX = BrodyNeuralynxProcessedSortingExtractor
+    SX = MSortedSortingExtractor
 
     @classmethod
     def get_source_schema(cls):

@@ -1,9 +1,9 @@
 """Authors: Cody Baker."""
 import numpy as np
 
-from nwb_conversion_tools.basedatainterface import BaseDataInterface
-from pynwb import NWBFile
 from h5py import File
+from pynwb import NWBFile
+from nwb_conversion_tools.basedatainterface import BaseDataInterface
 
 
 class MSortedProcessedInterface(BaseDataInterface):

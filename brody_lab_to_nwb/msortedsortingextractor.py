@@ -3,8 +3,8 @@ import numpy as np
 import spikeextractors as se
 
 
-class BrodyNeuralynxProcessedSortingExtractor(se.SortingExtractor):
-    extractor_name = "BrodyNeuralynxSorting"
+class MSortedSortingExtractor(se.SortingExtractor):
+    extractor_name = "MSorted"
     is_writable = False
 
     def __init__(self):
