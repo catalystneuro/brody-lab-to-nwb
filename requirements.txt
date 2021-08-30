@@ -2,6 +2,8 @@ numpy==1.19.3
 h5py==2.10.0
 pynwb==1.4.0
 isodate==0.6.0
-git+https://github.com/catalystneuro/nwb-conversion-tools@19defdd7550653a710bd7c9a09b101b91375406d
+nwb-conversion-tools==0.9.1
 jupyter==1.0.0
 nwbwidgets==0.5.1
+nwbwidgets==0.5.1
+natsort==7.1.1

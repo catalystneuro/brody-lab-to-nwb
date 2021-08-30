@@ -4,6 +4,7 @@ from nwb_conversion_tools import (
     NeuralynxRecordingInterface,
     SpikeGLXRecordingInterface,
     SpikeGLXLFPInterface,
+    SpikeGadgetsRecordingInterface,
 )
 
 from .msortedprocesseddatainterface import MSortedProcessedInterface
@@ -27,4 +28,12 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
         NeuralynxRecording=NeuralynxRecordingInterface,
         ProcessedBehavior=MSortedProcessedInterface,
         Sorted=MSortedSortingInterface
+    )
+
+
+class BrodySpikeGadgetsNWBConverter(NWBConverter):
+    """Primary conversion class for the SpikeGadgets formatted Brody lab data."""
+
+    data_interface_classes = dict(
+        SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
     )
