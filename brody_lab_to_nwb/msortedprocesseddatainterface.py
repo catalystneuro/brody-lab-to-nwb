@@ -65,7 +65,7 @@ class MSortedProcessedInterface(BaseDataInterface):
         )
         times_column_descriptions.update({"break": ""})  # TODO
         for col, description in times_column_descriptions.items():
-            name = f"{col}_times"
+            name = f"{col}_time"
             mat_data.update({name: mat_file["Msorted"]["Trials"]["stateTimes"][col][0]})
             nwbfile.add_trial_column(name=name, description=description)
 
