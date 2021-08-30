@@ -1,6 +1,11 @@
 """Authors: Cody Baker."""
-from nwb_conversion_tools import NWBConverter, NeuralynxRecordingInterface, SpikeGLXRecordingInterface, \
-    SpikeGLXLFPInterface
+from nwb_conversion_tools import (
+    NWBConverter,
+    NeuralynxRecordingInterface,
+    SpikeGLXRecordingInterface,
+    SpikeGLXLFPInterface,
+    SpikeGadgetsRecordingInterface,
+)
 
 from .poissonclicksdatainterface import PoissonClicksDataInterface
 from .neuralynxbehaviordatainterface import NeuralynxBehaviorDataInterface
@@ -22,4 +27,12 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
     data_interface_classes = dict(
         NeuralynxRecording=NeuralynxRecordingInterface,
         Processed=NeuralynxBehaviorDataInterface
+    )
+
+
+class BrodySpikeGadgetsNWBConverter(NWBConverter):
+    """Primary conversion class for the SpikeGadgets formatted Brody lab data."""
+
+    data_interface_classes = dict(
+        SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
     )
