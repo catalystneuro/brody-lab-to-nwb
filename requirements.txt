@@ -5,3 +5,4 @@ isodate==0.6.0
 nwb-conversion-tools==0.9.1
 jupyter==1.0.0
 nwbwidgets==0.5.1
+natsort==7.1.1
