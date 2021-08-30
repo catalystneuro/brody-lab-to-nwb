@@ -29,7 +29,7 @@ class MSortedProcessedInterface(BaseDataInterface):
         mat_file = File(self.source_data["file_path"], mode="r")
 
         metadata = dict(
-            NWBFile=dict(session_id=str(round(mat_file["Msorted"]["sessid"][()][0][0]))),
+            NWBFile=dict(session_id=str(round(mat_file["Msorted"]["sessid"][0][0]))),
             Subject=dict(subject_id="".join([chr(x[0]) for x in mat_file["Msorted"]["rat"][()]]))
         )
         return metadata
@@ -39,17 +39,17 @@ class MSortedProcessedInterface(BaseDataInterface):
         side_mapping = dict(l="left", r="right", f="front")
 
         mat_data = dict(
-            start_times=mat_file["Msorted"]["Trials"]["stateTimes"]["sending_trialnum"][()][0],
-            stop_times=mat_file["Msorted"]["Trials"]["stateTimes"]["cleaned_up"][()][0],
+            start_times=mat_file["Msorted"]["Trials"]["stateTimes"]["sending_trialnum"][0],
+            stop_times=mat_file["Msorted"]["Trials"]["stateTimes"]["cleaned_up"][0],
             trial_type=[chr(x) for x in mat_file["Msorted"]["Trials"]["trial_type"][0]],
-            violated=mat_file["Msorted"]["Trials"]["violated"][()][0].astype(bool),
-            is_hit=mat_file["Msorted"]["Trials"]["is_hit"][()][0].astype(bool),
+            violated=mat_file["Msorted"]["Trials"]["violated"][0].astype(bool),
+            is_hit=mat_file["Msorted"]["Trials"]["is_hit"][0].astype(bool),
             side=[side_mapping[chr(x)] for x in mat_file["Msorted"]["Trials"]["sides"][0]],
-            gamma=mat_file["Msorted"]["Trials"]["gamma"][()][0],
-            reward_location=mat_file["Msorted"]["Trials"]["reward_loc"][()][0],
-            poked_r=mat_file["Msorted"]["Trials"]["pokedR"][()][0],
-            stim_dur_s=mat_file["Msorted"]["Trials"]["stim_dur_s"][()][0],
-            click_diff_hz=mat_file["Msorted"]["Trials"]["stim_dur_s"][()][0]
+            gamma=mat_file["Msorted"]["Trials"]["gamma"][0],
+            reward_location=mat_file["Msorted"]["Trials"]["reward_loc"][0],
+            poked_r=mat_file["Msorted"]["Trials"]["pokedR"][0],
+            stim_dur_s=mat_file["Msorted"]["Trials"]["stim_dur_s"][0],
+            click_diff_hz=mat_file["Msorted"]["Trials"]["stim_dur_s"][0]
         )
 
         times_column_descriptions = dict(
@@ -66,7 +66,7 @@ class MSortedProcessedInterface(BaseDataInterface):
         times_column_descriptions.update({"break": ""})  # TODO
         for col, description in times_column_descriptions.items():
             name = f"{col}_times"
-            mat_data.update({name: mat_file["Msorted"]["Trials"]["stateTimes"][col][()][0]})
+            mat_data.update({name: mat_file["Msorted"]["Trials"]["stateTimes"][col][0]})
             nwbfile.add_trial_column(name=name, description=description)
 
         column_descriptions = dict(
@@ -86,13 +86,13 @@ class MSortedProcessedInterface(BaseDataInterface):
         side_mapping = dict(l="left", r="right")
         n_trials = len(mat_data["trial_type"])
         add_pharma = mat_file["Msorted"]["Trials"]["pharma"]["manip"].shape == (1, n_trials)
-        add_laser = any(mat_file["Msorted"]["Trials"]["laser"]["isOn"][()][0])
+        add_laser = any(mat_file["Msorted"]["Trials"]["laser"]["isOn"][0])
 
         if add_pharma:
             mat_data.update(
                 pharma_manipulation=mat_file["Msorted"]["Trials"]["pharma"]["manip"],
-                pharma_injector_mm=mat_file["Msorted"]["Trials"]["pharma"]["injector_mm"][()][0],
-                pharma_dose_ng=mat_file["Msorted"]["Trials"]["pharma"]["doseNG"][()][0]
+                pharma_injector_mm=mat_file["Msorted"]["Trials"]["pharma"]["injector_mm"][0],
+                pharma_dose_ng=mat_file["Msorted"]["Trials"]["pharma"]["doseNG"][0]
             )
 
             pharma_column_descriptions = dict(
@@ -105,11 +105,11 @@ class MSortedProcessedInterface(BaseDataInterface):
                 nwbfile.add_trial_column(name=name, description=description)
         if add_laser:
             mat_data.update(
-                laser_is_on=mat_file["Msorted"]["Trials"]["laser"]["isOn"][()][0].astype(bool),
-                laser_pulse_ms=mat_file["Msorted"]["Trials"]["laser"]["pulseMS"][()][0],
-                laser_freq_hz=mat_file["Msorted"]["Trials"]["laser"]["freqHz"][()][0],
-                laser_latency_ms=mat_file["Msorted"]["Trials"]["laser"]["latencyMS"][()][0],
-                laser_duration_ms=mat_file["Msorted"]["Trials"]["laser"]["durMS"][()][0],
+                laser_is_on=mat_file["Msorted"]["Trials"]["laser"]["isOn"][0].astype(bool),
+                laser_pulse_ms=mat_file["Msorted"]["Trials"]["laser"]["pulseMS"][0],
+                laser_freq_hz=mat_file["Msorted"]["Trials"]["laser"]["freqHz"][0],
+                laser_latency_ms=mat_file["Msorted"]["Trials"]["laser"]["latencyMS"][0],
+                laser_duration_ms=mat_file["Msorted"]["Trials"]["laser"]["durMS"][0],
             )
 
             laser_column_descriptions = dict(
