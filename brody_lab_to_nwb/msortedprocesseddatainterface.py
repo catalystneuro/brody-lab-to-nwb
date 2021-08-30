@@ -128,7 +128,7 @@ class MSortedProcessedInterface(BaseDataInterface):
         for k in range(n_trials):
             trial_kwargs = dict(start_time=mat_data["start_times"][k], stop_time=mat_data["stop_times"][k])
             for x in times_column_descriptions:
-                name = f"{x}_times"
+                name = f"{x}_time"
                 trial_kwargs.update({name: mat_data[name][k]})
             for x in column_descriptions:
                 trial_kwargs.update({x: mat_data[x][k]})
