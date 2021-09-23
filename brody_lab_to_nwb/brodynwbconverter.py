@@ -7,8 +7,8 @@ from nwb_conversion_tools import (
     SpikeGadgetsRecordingInterface,
 )
 
-from .msortedprocesseddatainterface import MSortedProcessedInterface
-from .msortedsortinginterface import MSortedSortingInterface
+from .interfaces.msortedprocesseddatainterface import MSortedProcessedInterface
+from .interfaces.msortedsortinginterface import MSortedSortingInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
