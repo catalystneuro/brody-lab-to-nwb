@@ -1,4 +1,4 @@
-"""Authors: Cody Baker."""
+"""Authors: Cody Baker and Jess Breda."""
 import numpy as np
 
 from h5py import File
