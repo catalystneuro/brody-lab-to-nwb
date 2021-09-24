@@ -6,13 +6,13 @@ from pynwb import NWBFile
 from nwb_conversion_tools.basedatainterface import BaseDataInterface
 from nwb_conversion_tools.utils.json_schema import FilePathType
 
-from .protocol_info_utils import load_behavior, make_beh_df
+from .protocol_info_utils import load_nested_mat, load_behavior, make_beh_df
 
 DEFAULT_COLUMN_MAP = dict(a=2)
 
 
 class ProtocolInfoInterface(BaseDataInterface):
-    """Conversion class for behavioral and spiking info contained in a protocol_info.mat file."""
+    """Conversion class for behavioral info contained in a protocol_info.mat file."""
 
     @classmethod
     def get_source_schema(cls):
@@ -32,7 +32,7 @@ class ProtocolInfoInterface(BaseDataInterface):
 
     def __init__(self, file_path: FilePathType):
         self.source_data = dict(file_path=file_path)
-        behavior_info = load_behavior(self.source_data["file_path"])
+        behavior_info = load_nested_mat(self.source_data["file_path"])["behS"]
         self.behavior_df = make_beh_df(behavior_info)
 
     def run_conversion(self, nwbfile: NWBFile, metadata: dict):
