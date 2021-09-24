@@ -34,7 +34,7 @@ class ProtocolInfoInterface(BaseDataInterface):
 
     def run_conversion(self, nwbfile: NWBFile, metadata: dict, column_map: dict, column_descriptions: dict):
         """
-        123
+        Convert the values in the behavioral dataframe object to the NWBFile Trials table.
 
         Parameters
         ----------
@@ -42,9 +42,31 @@ class ProtocolInfoInterface(BaseDataInterface):
             DESCRIPTION.
         metadata : dict
             DESCRIPTION.
+        column_map : dict
+            A dictionary mapping the column names in the dataframe to intended column names in the NWBFile Trials table.
+            We encourage the user to remap any columns that represent timed events by adding _time or _times
+            (for multiple) to the end of the NWBFile name.
+
+            E.g.,
+                column_map = dict(hit_hist=hit_history, c_poke=c_poke_time, ...)
+
+            Likewise, if there are any binary conditions, we encourage manipulating the underlying data to be boolean,
+            and to change the name of the column to is_* where * is the intended name.
+
+            E.g., if
+                self.behavior_df["laser_on"][:] = [1 0 0 1 ...]
+            then set
+                self.behavior_df["laser_on"][:] = [True False False True ...]
+            and
+                column_map = dict(laser_on=is_laser_on, ...)
         column_descriptions : dict
-            DESCRIPTION.
+            A dictionary pairing the NWBFile column names with string text describing their context in the experiment.
         """
+        assert len(column_map) == len(column_descriptions), (
+            f"The length of the column_map ({len(column_map)}) does not match the length of "
+            f"column_descriptions ({len(column_descriptions)})!"
+        )
+
         for nwb_name, description in column_descriptions.items():
             nwbfile.add_trial_column(name=nwb_name, description=description)
 
