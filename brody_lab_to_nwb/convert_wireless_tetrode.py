@@ -37,7 +37,7 @@ stub_test = True
 source_data = dict(
     SpikeGadgetsRecording=dict(
         filename=str(raw_data_file),
-        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from
+        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from acquisition system
         probe_file_path=str(probe_file_path)
     ),
     ProtocolInfo=dict(file_path=str(protocol_info_file))
