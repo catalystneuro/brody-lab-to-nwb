@@ -6,7 +6,7 @@ from pynwb import NWBFile
 from nwb_conversion_tools.basedatainterface import BaseDataInterface
 from nwb_conversion_tools.utils.json_schema import FilePathType
 
-from .protocol_info_utils import load_nested_mat, load_behavior, make_beh_df
+from .protocol_info_utils import load_nested_mat, make_beh_df
 
 DEFAULT_COLUMN_MAP = dict(a=2)
 
@@ -44,14 +44,20 @@ class ProtocolInfoInterface(BaseDataInterface):
         """
         column_mapping = pd.read_csv("column_mapping.csv", keep_default_na=False)
 
-        for nwb_name, nwb_description in zip(column_mapping["nwb_name"], column_mapping["nwb_description"]):
-            nwbfile.add_trial_column(name=nwb_name, description=nwb_description)
+        # The .csv may contain more fields than were contained in this particular .mat file
+        valid_column_mapping = column_mapping[[x in self.behavior_df for x in column_mapping["mat_name"]]]
+
+        for _, row in valid_column_mapping.iterrows():
+            nwbfile.add_trial_column(name=row["nwb_name"], description=row["nwb_description"])
 
         n_trials = self.behavior_df.shape[0]
         for k in range(n_trials):
             trial_kwargs = dict()
-            for mat_name, nwb_name in zip(column_mapping["mat_name"], column_mapping["nwb_name"]):
-                trial_kwargs.update({nwb_name: self.behavior_df[mat_name][k]})
-            all_times = [v for k, v in trial_kwargs.items() if "time" in k]
-            trial_kwargs.update(start_time=np.min(all_times), stop_time=np.max(all_times))
+            for _, row in valid_column_mapping.iterrows():
+                trial_kwargs.update({row["nwb_name"]: self.behavior_df[row["mat_name"]][k]})
+            # From conversations with Jess, hard-coding start and stop times relative to shifts of particular columns
+            trial_kwargs.update(
+                start_time=trial_kwargs["c_poke_time"] - 0.5,
+                stop_time=trial_kwargs["end_state_time"] + 1
+            )
             nwbfile.add_trial(**trial_kwargs)
