@@ -15,7 +15,6 @@ nwbfile_path = base_path / "SpikeGadgetsTest.nwb"
 raw_data_file = base_path / "W122_06_09_2019_1_fromSD.rec"
 probe_file_path = base_path / "tetrode_32.prb"
 protocol_info_file = base_path / "protocol_info.mat"
-spks_file = base_path / "ksphy_clusters_foranalysis.mat"
 
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
