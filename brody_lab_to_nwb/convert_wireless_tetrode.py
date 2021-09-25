@@ -33,9 +33,6 @@ subject_info = dict(
 stub_test = True
 
 
-# The ProtocolInfo interface requires some manual mapping
-
-
 # Run the conversion
 source_data = dict(
     SpikeGadgetsRecording=dict(
