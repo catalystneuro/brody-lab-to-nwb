@@ -14,18 +14,8 @@ class ProtocolInfoInterface(BaseDataInterface):
 
     @classmethod
     def get_source_schema(cls):
-        source_schema = dict(
-            required=["file_path"],
-            properties=dict(
-                file_path=dict(
-                    type="string",
-                    format="file",
-                    description="Path to .mat file containing processed data."
-                )
-            ),
-            type="object",
-            additionalProperties=False
-        )
+        source_schema = super().get_source_schema()
+        source_schema["properties"]["file_path"].update(description="Path to .mat file containing processed data.")
         return source_schema
 
     def __init__(self, file_path: FilePathType):
