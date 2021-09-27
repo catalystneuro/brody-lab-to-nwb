@@ -46,8 +46,6 @@ source_data = dict(
 )
 conversion_options = dict(
     SpikeGadgetsRecording=dict(stub_test=stub_test),
-    ProtocolInfo=dict(),
-    ksphySorting=dict(),
 )
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
