@@ -44,11 +44,10 @@ source_data = dict(
         gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from
         probe_file_path=str(probe_file_path)
     ),
-    ProtocolInfo=dict(file_path=str(protocol_info_file))
+    ProtocolInfo=dict(file_path=str(protocol_info_file)),
 )
 conversion_options = dict(
     SpikeGadgetsRecording=dict(stub_test=stub_test),
-    ProtocolInfo=dict()
 )
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
