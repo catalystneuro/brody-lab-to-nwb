@@ -34,21 +34,20 @@ subject_info = dict(
 stub_test = True
 
 
-# The ProtocolInfo interface requires some manual mapping
-
-
 # Run the conversion
 source_data = dict(
     SpikeGadgetsRecording=dict(
         filename=str(raw_data_file),
         gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from
-        probe_file_path=str(probe_file_path)
+        probe_file_path=str(probe_file_path),
     ),
-    ProtocolInfo=dict(file_path=str(protocol_info_file))
+    ProtocolInfo=dict(file_path=str(protocol_info_file)),
+    ksphySorting=dict(file_path=str(spks_file)),
 )
 conversion_options = dict(
     SpikeGadgetsRecording=dict(stub_test=stub_test),
-    ProtocolInfo=dict()
+    ProtocolInfo=dict(),
+    ksphySorting=dict(),
 )
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
