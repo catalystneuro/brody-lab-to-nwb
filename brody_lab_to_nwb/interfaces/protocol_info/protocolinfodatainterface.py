@@ -4,7 +4,7 @@ import pandas as pd
 
 from pynwb import NWBFile
 from nwb_conversion_tools.basedatainterface import BaseDataInterface
-from nwb_conversion_tools.utils.json_schema import FilePathType
+from nwb_conversion_tools.utils.json_schema import FilePathType, get_schema_from_method_signature
 
 from .protocol_info_utils import load_nested_mat, make_beh_df
 

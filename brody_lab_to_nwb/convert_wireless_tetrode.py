@@ -48,7 +48,7 @@ conversion_options = dict(
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
-metadata['Subject'].update(subject_info)
+# metadata['Subject'].update(subject_info)
 converter.run_conversion(
     nwbfile_path=str(nwbfile_path),
     metadata=metadata,
