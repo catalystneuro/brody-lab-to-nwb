@@ -8,8 +8,6 @@ from nwb_conversion_tools.utils.json_schema import FilePathType
 
 from .protocol_info_utils import load_nested_mat, make_beh_df
 
-DEFAULT_COLUMN_MAP = dict(a=2)
-
 
 class ProtocolInfoInterface(BaseDataInterface):
     """Conversion class for behavioral info contained in a protocol_info.mat file."""

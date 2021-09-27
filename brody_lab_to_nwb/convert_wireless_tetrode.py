@@ -15,7 +15,6 @@ nwbfile_path = base_path / "SpikeGadgetsTest.nwb"
 raw_data_file = base_path / "W122_06_09_2019_1_fromSD.rec"
 probe_file_path = base_path / "tetrode_32.prb"
 protocol_info_file = base_path / "protocol_info.mat"
-spks_file = base_path / "ksphy_clusters_foranalysis.mat"
 
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
@@ -34,14 +33,11 @@ subject_info = dict(
 stub_test = True
 
 
-# The ProtocolInfo interface requires some manual mapping
-
-
 # Run the conversion
 source_data = dict(
     SpikeGadgetsRecording=dict(
         filename=str(raw_data_file),
-        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from
+        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from acquisition system
         probe_file_path=str(probe_file_path)
     ),
     ProtocolInfo=dict(file_path=str(protocol_info_file)),
@@ -52,7 +48,7 @@ conversion_options = dict(
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
-# metadata['Subject'].update(subject_info)
+metadata['Subject'].update(subject_info)
 converter.run_conversion(
     nwbfile_path=str(nwbfile_path),
     metadata=metadata,
