@@ -5,14 +5,14 @@ import scipy.io as spio
 from nwb_conversion_tools.datainterfaces.ecephys.basesortingextractorinterface import BaseSortingExtractorInterface
 from nwb_conversion_tools.utils.json_schema import FilePathType
 
-from .ksphysortingextractor import ksphySortingExtractor
 from .protocol_info_utils import make_spks_dict
+from ..customsortingextractor import CustomSortingExtractor
 
 
-class ksphySortingInterface(BaseSortingExtractorInterface):
-    """Conversion class for the pre-sorted data corresponding to the SpikeGadgets format for the Brody lab."""
+class AnalysisClustersSortingInterface(BaseSortingExtractorInterface):
+    """Conversion class for the post-phy processed data corresponding to the SpikeGadgets format for the Brody lab."""
 
-    SX = ksphySortingExtractor
+    SX = CustomSortingExtractor
 
     @classmethod
     def get_source_schema(cls):

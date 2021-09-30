@@ -3,8 +3,8 @@ import numpy as np
 import spikeextractors as se
 
 
-class ksphySortingExtractor(se.SortingExtractor):
-    extractor_name = "ksphy"
+class CustomSortingExtractor(se.SortingExtractor):
+    extractor_name = "custom"
     is_writable = False
 
     def __init__(self):
