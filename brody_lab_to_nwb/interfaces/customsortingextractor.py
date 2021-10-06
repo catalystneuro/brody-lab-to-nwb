@@ -3,12 +3,12 @@ import numpy as np
 import spikeextractors as se
 
 
-class MSortedSortingExtractor(se.SortingExtractor):
-    extractor_name = "MSorted"
+class CustomSortingExtractor(se.SortingExtractor):
+    extractor_name = "custom"
     is_writable = False
 
     def __init__(self):
-        super().__init__(self)
+        super().__init__()
         self._units = {}
         self.is_dumpable = False
 

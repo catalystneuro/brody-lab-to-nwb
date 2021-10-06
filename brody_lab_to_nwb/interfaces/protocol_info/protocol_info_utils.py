@@ -64,7 +64,7 @@ def load_nested_mat(filename):
 
 def make_beh_df(beh_info):
     """
-    Wangle the ndarry from load_behaviorand and put it into a tidy dataframe.
+    Wrangle the ndarry and put it into a tidy dataframe.
 
     Parameters
     ----------
@@ -190,3 +190,47 @@ def find_first_sound(beh_df):
     # taking behS.soundpairs, using dB from athena paper
     values = ['68', '76', '84', '92*', '60*', 'psycho']
     beh_df['first_sound'] = np.select(conditions, values)
+
+
+def make_spks_dict(spks_info):
+    """
+    Wrangle the ndarry and put it into a tidy dataframe.
+
+    Parameters
+    ----------
+    spks_info : ndarray
+        Extracted .mat structure.
+
+    Returns
+    -------
+    spks_dict : dict
+        Dictionary with spiking information for each unit.
+    """
+    spks_dict = dict()
+    ncells = len(spks_info['trodenum'])
+    trode_nums = []
+    m_waves = []
+    s_waves = []
+    spk_qual = []
+    spk_times = []
+    spks_dict['date'] = spks_info['date'][0][0]
+    spks_dict['spk2fsm'] = spks_info['behav_session'][0]['spk2fsm_rt'][0][0][0]
+    spks_dict['fs'] = spks_info['fs'][0][0][0]
+    for cell in range(ncells):
+        trode_nums.append(spks_info['trodenum'][cell][0][0])
+        spk_times.append(spks_info['event_ts_fsm'][cell])  # In behavior time
+        m_waves.append(spks_info['waves_mn'][cell].reshape(4, 32))
+        s_waves.append(spks_info['waves_std'][cell].reshape(4, 32))
+
+        if spks_info['mua'][cell][0][0] == 1:
+            spk_qual.append('multi')
+        elif spks_info['single'][cell][0][0] == 1:
+            spk_qual.append('single')
+        else:
+            raise TypeError("Unit not marked as multi or single")
+    spks_dict['trode_nums'] = trode_nums
+    spks_dict['spk_qual'] = spk_qual
+    spks_dict['spk_times'] = spk_times
+    spks_dict['mean_wav'] = m_waves  # units x channel
+    spks_dict['std_wav'] = s_waves
+    return spks_dict

@@ -16,6 +16,9 @@ raw_data_file = base_path / "W122_06_09_2019_1_fromSD.rec"
 probe_file_path = base_path / "tetrode_32.prb"
 protocol_info_file = base_path / "protocol_info.mat"
 
+# If utilizing sorting data processed from the Phy data
+clusters_for_analysis_file = base_path / "ksphy_clusters_foranalysis.mat"
+
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
 session_start = datetime(1970, 1, 1)  # (Year, Month, Day)
@@ -37,6 +40,11 @@ stub_test = True
 source_data = dict(
     SpikeGadgetsRecording=dict(
         filename=str(raw_data_file),
+        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from
+        probe_file_path=str(probe_file_path),
+    ),
+    ProtocolInfo=dict(file_path=str(protocol_info_file)),
+    AnalysisClusters=dict(file_path=str(clusters_for_analysis_file)),
         gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from acquisition system
         probe_file_path=str(probe_file_path)
     ),
