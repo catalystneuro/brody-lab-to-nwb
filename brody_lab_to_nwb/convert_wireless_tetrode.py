@@ -6,13 +6,15 @@ from datetime import timedelta, datetime
 from brody_lab_to_nwb import BrodySpikeGadgetsNWBConverter
 
 # Point to the base folder path for both recording data and Virmen
-base_path = Path("D:/Brody/Wireless Tetrodes")
+base_path = Path("E:/Brody/WirelessTetrodes")
 
 # Name the NWBFile and point to the desired save path
-nwbfile_path = base_path / "FullTesting.nwb"
+nwbfile_path = base_path / "SpikeGadgetsTest.nwb"
 
 # Point to the various files for the conversion
 raw_data_file = base_path / "W122_06_09_2019_1_fromSD.rec"
+probe_file_path = base_path / "tetrode_32.prb"
+protocol_info_file = base_path / "protocol_info.mat"
 
 # Enter Session and Subject information here - uncomment any fields you want to include
 session_description = "Enter session description here."
@@ -33,13 +35,20 @@ stub_test = True
 
 # Run the conversion
 source_data = dict(
-    SpikeGadgetsRecording=dict(filename=str(raw_data_file)),
+    SpikeGadgetsRecording=dict(
+        filename=str(raw_data_file),
+        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from acquisition system
+        probe_file_path=str(probe_file_path)
+    ),
+    ProtocolInfo=dict(file_path=str(protocol_info_file)),
 )
-conversion_options = dict(SpikeGadgetsRecording=dict(stub_test=stub_test))
+conversion_options = dict(
+    SpikeGadgetsRecording=dict(stub_test=stub_test),
+)
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
-metadata['Subject'].update(subject_info)
+metadata.update(Subject=subject_info)
 converter.run_conversion(
     nwbfile_path=str(nwbfile_path),
     metadata=metadata,

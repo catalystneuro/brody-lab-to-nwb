@@ -1,2 +1,3 @@
 from .brodynwbconverter import PoissonClicksNWBConverter
 from .brodynwbconverter import BrodyNeuralynxNWBConverter
+from .brodynwbconverter import BrodySpikeGadgetsNWBConverter

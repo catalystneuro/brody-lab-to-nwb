@@ -1,0 +1,16 @@
+mat_name,nwb_name,nwb_description
+c_poke,c_poke_time,
+hit_hist,hit_history,"If the trial was a hit or miss."
+trial_num,trial_number,"Original index of the trial."
+correct_side,correct_side,""
+prev_side,prev_side,""
+aud1_on,aud1_on_time,""
+aud1_off,aud1_off_time,""
+aud1_sigma,aud1_sigma_time,""
+aud2_on,aud2_on_time,""
+aud2_off,aud2_off_time,""
+aud2_sigma,aud2_sigma_time,""
+end_state,end_state_time,""
+hit_state,hit_state_time,""
+louder,louder,""
+first_sound,first_sound,""

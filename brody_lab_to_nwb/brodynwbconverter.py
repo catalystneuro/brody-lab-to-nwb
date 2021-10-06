@@ -7,8 +7,9 @@ from nwb_conversion_tools import (
     SpikeGadgetsRecordingInterface,
 )
 
-from .interfaces.msortedprocesseddatainterface import MSortedProcessedInterface
-from .interfaces.msortedsortinginterface import MSortedSortingInterface
+from .interfaces.msorted.msortedprocesseddatainterface import MSortedProcessedInterface
+from .interfaces.msorted.msortedsortinginterface import MSortedSortingInterface
+from .interfaces.protocol_info.protocolinfodatainterface import ProtocolInfoInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -36,4 +37,5 @@ class BrodySpikeGadgetsNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         SpikeGadgetsRecording=SpikeGadgetsRecordingInterface,
+        ProtocolInfo=ProtocolInfoInterface
     )
