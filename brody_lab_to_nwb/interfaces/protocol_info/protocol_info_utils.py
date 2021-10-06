@@ -85,7 +85,7 @@ def make_beh_df(beh_info):
     # rename previous side to be L/R
     prev_side_adj = np.roll(beh_info['prev_side'], 1)  # n-1 trial info
     prev_side_adj = np.where(prev_side_adj == 114, 'RIGHT', 'LEFT')
-    prev_side_adj[0] = 'NaN'  # trial 0 doesn't have a previous
+    prev_side_adj[0] = 'N/A'  # trial 0 doesn't have a previous
 
     # turn hit info to strings
     beh_df['hit_hist'] = beh_info['hit_history']

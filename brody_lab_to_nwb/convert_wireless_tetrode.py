@@ -45,6 +45,10 @@ source_data = dict(
     ),
     ProtocolInfo=dict(file_path=str(protocol_info_file)),
     AnalysisClusters=dict(file_path=str(clusters_for_analysis_file)),
+        gains=[0.195],  # SpikeGadgets requires manual specification of the conversion factor from acquisition system
+        probe_file_path=str(probe_file_path)
+    ),
+    ProtocolInfo=dict(file_path=str(protocol_info_file)),
 )
 conversion_options = dict(
     SpikeGadgetsRecording=dict(stub_test=stub_test),
@@ -52,7 +56,7 @@ conversion_options = dict(
 converter = BrodySpikeGadgetsNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 metadata['NWBFile'].update(session_description=session_description)
-# metadata['Subject'].update(subject_info)
+metadata.update(Subject=subject_info)
 converter.run_conversion(
     nwbfile_path=str(nwbfile_path),
     metadata=metadata,
