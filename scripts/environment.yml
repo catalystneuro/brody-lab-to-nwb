@@ -1,0 +1,15 @@
+name: spikeinterface
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - numpy
+    - h5py
+    - tqdm
+    - scipy
+    - matplotlib
+    - scikit-learn
+    - jupyter
+    - pynwb
+    - herdingspikes
+    - spikeinterface==0.13

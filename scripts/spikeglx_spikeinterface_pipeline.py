@@ -6,19 +6,24 @@ from pprint import pprint
 import spikeextractors as se
 import spiketoolkit as st
 import spikesorters as ss
-import spikecomparison as sc
-import spikewidgets as sw
 
 
-n_jobs = 16
-chunk_mb = 4000
+n_jobs = 4
+chunk_mb = 2000
 export_raw_to_phy = False
 export_cutated_to_phy = True
 
 # Define sorter and params
 
-sorter = "kilosort2"
-sorter_params = dict(car=False, n_jobs_bin=n_jobs, chunk_mb=chunk_mb)
+sorter = "ironclust"
+sorter_params = {}
+
+
+# on the cluster it's better to point to the sorter inside the script
+ss.IronClustSorter.set_ironclust_path("/Users/abuccino/Documents/Codes/spike_sorting/sorters/ironclust")
+# ss.Kilosort2Sorter.set_kilosort2_path("$HOME/Documents/Codes/spike_sorting/sorters/kilsort2")
+
+# sorter_params = dict(car=False, n_jobs_bin=n_jobs, chunk_mb=chunk_mb)
 
 # Auto curation params
 
@@ -29,11 +34,13 @@ firing_rate_threshold = 0.1
 
 # 1a) Load AP recordings, LF recordings and TTL signals
 
-base_path = Path("E:/Brody")
-raw_data_path = base_path / "Neuropixels_Feldman" / "210209" / "SpikeGLX"
-session_name = "LR_210209_g0"
-ap_bin_path = raw_data_path / session_name / f"{session_name}_imec0" / f"{session_name}_g0_t0.imec0.ap.bin"
+base_path = Path("/Users/abuccino/Documents/Data/catalyst/brody")
+raw_data_path = base_path
+session_name = "test_session"
+ap_bin_path = Path("/Users/abuccino/Documents/Data/catalyst/brody/test_npix/LRKV_210217_g2_t0.imec0.ap.bin")
 lf_bin_path = ap_bin_path.parent / ap_bin_path.name.replace("ap", "lf")
+# ap_bin_path = raw_data_path / session_name / f"{session_name}_imec0" / f"{session_name}_g0_t0.imec0.ap.bin"
+# lf_bin_path = ap_bin_path.parent / ap_bin_path.name.replace("ap", "lf")
 
 
 # Make spikeinterface folders
@@ -51,6 +58,7 @@ recording_ap = se.SpikeGLXRecordingExtractor(ap_bin_path)
 recording_lf = se.SpikeGLXRecordingExtractor(lf_bin_path)
 
 if stub_test:
+    print("Stub test! Clipping recordings!")
     recording_ap = se.SubRecordingExtractor(recording_ap,
                                             end_frame=int(nsec_stub * recording_ap.get_sampling_frequency()))
     recording_lf = se.SubRecordingExtractor(recording_lf,
@@ -88,7 +96,7 @@ num_frames = recording_processed.get_num_frames()
 
 
 # 3) Run spike sorter
-
+print(f"Running {sorter}")
 sorting = ss.run_sorter(sorter, recording_processed, output_folder=spikeinterface_folder / sorter / "output",
                         verbose=True, **sorter_params)
 
@@ -109,8 +117,8 @@ postprocessing_params['verbose'] = True  # max RAM usage in Mb
 # Set quality metric list
 
 # Quality metrics
-qc_list = st.validation.get_quality_metrics_list()
-print(f"Available quality metrics: {qc_list}")
+# qc_list = st.validation.get_quality_metrics_list()
+# print(f"Available quality metrics: {qc_list}")
 
 # (optional) define subset of qc
 qc_list = ['snr', 'isi_violation', 'firing_rate']
@@ -122,7 +130,7 @@ ec_list = st.postprocessing.get_template_features_list()
 print(f"Available EC features: {ec_list}")
 
 # (optional) define subset of ec
-ec_list = None #['peak_to_valley', 'halfwidth']
+ec_list = None  #['peak_to_valley', 'halfwidth']
 
 
 # Postprocess all sorting outputs
@@ -214,10 +222,8 @@ if export_cutated_to_phy:
 
 # 7) Save to NWB; writes only the spikes
 
-# %%
-
 # The name of the NWBFile containing behavioral or full recording data
-nwbfile_path = raw_data_path / session_name / f"Brody_PoissonClicks_{session_name}.nwb"
+nwbfile_path = raw_data_path / session_name / f"{session_name}.nwb"
 
 # Choose the sorting extractor from the notebook environment you would like to write to NWB
 chosen_sorting_extractor = sorting_curated
