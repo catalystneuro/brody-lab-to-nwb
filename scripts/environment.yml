@@ -11,5 +11,4 @@ dependencies:
     - scikit-learn
     - jupyter
     - pynwb
-    - herdingspikes
     - spikeinterface==0.13
