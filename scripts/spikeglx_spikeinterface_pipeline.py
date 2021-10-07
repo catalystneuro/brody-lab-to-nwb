@@ -11,7 +11,7 @@ import spikesorters as ss
 n_jobs = 4
 chunk_mb = 2000
 export_raw_to_phy = False
-export_cutated_to_phy = True
+export_curated_to_phy = True
 
 # Define sorter and params
 
