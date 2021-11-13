@@ -48,6 +48,7 @@ class MSortedProcessedInterface(BaseDataInterface):
             gamma=mat_file["Msorted"]["Trials"]["gamma"][0],
             reward_location=mat_file["Msorted"]["Trials"]["reward_loc"][0],
             poked_r=mat_file["Msorted"]["Trials"]["pokedR"][0],
+            stim_dur_s=mat_file["Msorted"]["Trials"]["stim_dur_s"][0],
             click_diff_hz=mat_file["Msorted"]["Trials"]["click_diff_hz"][0]
         )
 
