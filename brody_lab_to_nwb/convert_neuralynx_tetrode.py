@@ -35,10 +35,9 @@ stub_test = True
 
 # Run the conversion
 source_data = dict(
-    # NeuralynxRecording=dict(folder_path=str(raw_data_folder)),
-    BrodyNeuralynxSorting=dict(file_path=str(processed_file_path)),
-    Processed=dict(file_path=str(processed_file_path)),
-    Sorted=dict(file_path=str(processed_file_path))
+    NeuralynxRecording=dict(folder_path=str(raw_data_folder)),
+    ProcessedBehavior=dict(file_path=str(processed_file_path)),
+    MSorted=dict(file_path=str(processed_file_path))
 )
 conversion_options = dict(NeuralynxRecording=dict(stub_test=stub_test))
 converter = BrodyNeuralynxNWBConverter(source_data=source_data)

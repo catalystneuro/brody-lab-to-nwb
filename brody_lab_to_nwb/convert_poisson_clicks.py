@@ -32,21 +32,20 @@ stub_test = True
 
 
 # Run the conversion
-session_start = datetime(*[int(x) for x in session_name.split("_")[1:]])
-session_str = str(session_start)[:10]
+session_str = "2019-05-30"
 raw_data_file = base_path / session_name / "Raw" / f"{session_str}_g0" / f"{session_str}_g0_imec0" \
     / f"{session_str}_g0_t0.imec0.ap.bin"
 lfp_data_file = raw_data_file.parent / raw_data_file.name.replace("ap", "lf")
 source_data = dict(
     SpikeGLXRecording=dict(file_path=str(raw_data_file)),
     SpikeGLXLFP=dict(file_path=str(lfp_data_file)),
-    Processed=dict(file_path=str(processed_file_path))
+    ProcessedBehavior=dict(file_path=str(processed_file_path))
 )
 conversion_options = dict(SpikeGLXRecording=dict(stub_test=stub_test), SpikeGLXLFP=dict(stub_test=stub_test))
 converter = PoissonClicksNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
-metadata['NWBFile'].update(session_description=session_description, session_start=session_start)
-metadata['Subject'].update(subject_info)
+metadata['NWBFile'].update(session_description=session_description)
+metadata.update(Subject=subject_info)
 converter.run_conversion(
     nwbfile_path=str(nwbfile_path),
     metadata=metadata,

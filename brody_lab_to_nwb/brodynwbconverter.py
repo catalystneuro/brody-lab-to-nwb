@@ -11,6 +11,7 @@ from .interfaces.msorted.msortedprocesseddatainterface import MSortedProcessedIn
 from .interfaces.msorted.msortedsortinginterface import MSortedSortingInterface
 from .interfaces.protocol_info.protocolinfodatainterface import ProtocolInfoInterface
 from .interfaces.protocol_info.analysisclusterssortinginterface import AnalysisClustersSortingInterface
+from .interfaces.poisson_clicks.poissonclicksprocessedinterface import PoissonClicksProcessedInterface
 
 
 class PoissonClicksNWBConverter(NWBConverter):
@@ -19,7 +20,7 @@ class PoissonClicksNWBConverter(NWBConverter):
     data_interface_classes = dict(
         SpikeGLXRecording=SpikeGLXRecordingInterface,
         SpikeGLXLFP=SpikeGLXLFPInterface,
-        ProcessedBehavior=MSortedProcessedInterface,
+        ProcessedBehavior=PoissonClicksProcessedInterface,
     )
 
 
@@ -29,7 +30,7 @@ class BrodyNeuralynxNWBConverter(NWBConverter):
     data_interface_classes = dict(
         NeuralynxRecording=NeuralynxRecordingInterface,
         ProcessedBehavior=MSortedProcessedInterface,
-        Sorted=MSortedSortingInterface,
+        MSorted=MSortedSortingInterface,
     )
 
 
