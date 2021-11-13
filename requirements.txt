@@ -8,3 +8,4 @@ nwbwidgets==0.5.1
 natsort==7.1.1
 spikecomparison==0.3.3
 spikewidgets==0.5.4
+neo==0.10.0
